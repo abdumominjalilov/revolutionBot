@@ -13,7 +13,8 @@ const {
     getUser,
     addUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getViewDriver
 } = require('../Controllers/Controllers.js')
 const { Router } = require('express')
 const router = Router()
@@ -22,26 +23,29 @@ const router = Router()
 // User
 
 router.get('/User', getAllUsers)
-router.get('/User/:id', getUser)
+router.get('/User/:tg_id', getUser)
 router.post('/User/add', addUser)
-router.put('/User/:id', updateUser)
-router.delete('/User/:id', deleteUser)
+router.put('/User/:tg_id', updateUser)
+router.delete('/User/:tg_id', deleteUser)
 
 // Driver
 
 router.get('/Driver', getAllDrivers)
-router.get('/Driver/:id', getDriver)
+router.get('/Driver/:tg_id', getDriver)
 router.post('/Driver/add', addDriver)
-router.put('/Driver/:id', updateDriver)
-router.delete('/Driver/:id', deleteDriver)
+router.put('/Driver/:tg_id', updateDriver)
+router.delete('/Driver/:tg_id', deleteDriver)
+
+//  ViewDriver
+router.get('/viewDriver/:viewDriver', getViewDriver)
 
 //  Customer
 
 router.get('/', getAllCustomers)
-router.get('/:id', getCustomer)
+router.get('/:tg_id', getCustomer)
 router.post('/add', addCustomer)
-router.put('/:id', updateCustomer)
-router.delete('/:id', deleteCustomer)
+router.put('/:tg_id', updateCustomer)
+router.delete('/:tg_id', deleteCustomer)
 
 
 module.exports = router

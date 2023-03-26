@@ -25,7 +25,7 @@ const getAllDrivers = async (req, res) => {
 
 const getDriver = async (req, res) => {
     try {
-        const DriverGet = await Driver.findById(req.params.id)
+        const DriverGet = await Driver.find({ tg_id: req.params.tg_id })
 
         if (!DriverGet) {
             return res.status(404).json({
@@ -113,7 +113,7 @@ const updateDriver = async (req, res) => {
             yolNarxi
         } = req.body
 
-        const updateDriver = await Driver.findByIdAndUpdate(req.params.id, {
+        const updateDriver = await Driver.findOneAndUpdate({ tg_id: req.params.tg_id }, {
             tg_id,
             username,
             firstname,
@@ -146,7 +146,7 @@ const updateDriver = async (req, res) => {
 const deleteDriver = async (req, res) => {
     try {
 
-        const deleteTDriver = await Driver.findByIdAndRemove(req.params.id)
+        const deleteTDriver = await Driver.findOneAndRemove({ tg_id: req.params.tg_id })
 
         res.status(201).json({
             message: "DELETED",
@@ -179,8 +179,10 @@ const getAllCustomers = async (req, res) => {
 // Desc: Get One Travel Book
 
 const getCustomer = async (req, res) => {
+    console.log(req.params.tg_id);
+
     try {
-        const CustomerGet = await Customer.findById(req.params.id)
+        const CustomerGet = await Customer.find({ tg_id: req.params.tg_id })
 
         if (!CustomerGet) {
             return res.status(404).json({
@@ -262,7 +264,7 @@ const updateCustomer = async (req, res) => {
             yolNarxi
         } = req.body
 
-        const updateCustomer = await Customer.findByIdAndUpdate(req.params.id, {
+        const updateCustomer = await Customer.findOneAndUpdate({ tg_id: req.params.tg_id }, {
             tg_id,
             username,
             firstname,
@@ -293,7 +295,7 @@ const updateCustomer = async (req, res) => {
 const deleteCustomer = async (req, res) => {
     try {
 
-        const deleteTCustomer = await Customer.findByIdAndRemove(req.params.id)
+        const deleteTCustomer = await Customer.findOneAndRemove({ tg_id: req.params.tg_id })
 
         res.status(201).json({
             message: "DELETED",
@@ -326,7 +328,7 @@ const getAllUsers = async (req, res) => {
 
 const getUser = async (req, res) => {
     try {
-        const UsersGet = await Users.findById(req.params.id)
+        const UsersGet = await Users.find({ tg_id: req.params.tg_id })
 
         if (!UsersGet) {
             return res.status(404).json({
@@ -387,7 +389,7 @@ const updateUser = async (req, res) => {
             lastname
         } = req.body
 
-        const updateUser = await Users.findByIdAndUpdate(req.params.id, {
+        const updateUser = await Users.findOneAndUpdate({ tg_id: req.params.tg_id }, {
             tg_id,
             username,
             firstname,
@@ -411,7 +413,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
 
-        const deleteTUser = await Users.findByIdAndRemove(req.params.id)
+        const deleteTUser = await Users.findOneAndRemove({ tg_id: req.params.tg_id })
 
         res.status(201).json({
             message: "DELETED",
@@ -422,6 +424,26 @@ const deleteUser = async (req, res) => {
     }
 }
 
+
+const getViewDriver = async (req, res) => {
+    try {
+        const UsersGet = await Users.find({ viewDriver: req.params.viewDriver })
+
+        if (!UsersGet) {
+            return res.status(404).json({
+                message: "Not Found"
+            })
+        }
+
+        return res.status(200).json({
+            message: 'succes',
+            User: UsersGet
+        })
+    } catch (error) {
+        console.log(error);
+        res.send(error)
+    }
+}
 
 module.exports = {
     getAllCustomers,
@@ -438,5 +460,6 @@ module.exports = {
     getUser,
     addUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getViewDriver
 }
