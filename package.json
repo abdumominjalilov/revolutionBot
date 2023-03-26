@@ -4,7 +4,9 @@
   "description": "react revolutsion bot",
   "main": "index.js",
   "scripts": {
-    "start": "npm index.js",
+    "server":"nodemon app.js",
+    "start": "node index.js",
+    "client":"npm run start --prefix client",
     "dev": "nodemon index.js",
     "test": "npm index.js"
   },
