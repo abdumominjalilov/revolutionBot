@@ -431,7 +431,7 @@ const deleteUser = async (req, res) => {
 
 const getViewDriver = async (req, res) => {
     try {
-        const UsersGet = await Users.find({ viewDriver: req.params.viewDriver })
+        const UsersGet = await Driver.find({ driverQayerTaxi: req.params.viewDriver })
 
         if (!UsersGet) {
             return res.status(404).json({
